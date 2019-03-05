@@ -30,12 +30,12 @@ class DataLoader():
                 pass
             imgs.append(img)
 
-        imgs = np.array(imgs)/np.mean(np.array(imgs)) - 1.
+        imgs = np.array(imgs) / np.mean(np.array(imgs)) - 1.
 
         return imgs
 
     def load_batch(self, batch_size=1, is_testing=False):
-        
+
         data_type = "train" if not is_testing else "val"
         path_A = glob('./datasets/%s/%sA/*' % (self.dataset_name, data_type))
         path_B = glob('./datasets/%s/%sB/*' % (self.dataset_name, data_type))
@@ -48,9 +48,9 @@ class DataLoader():
         path_A = np.random.choice(path_A, total_samples, replace=False)
         path_B = np.random.choice(path_B, total_samples, replace=False)
 
-        for i in range(self.n_batches-1):
-            batch_A = path_A[i*batch_size:(i+1)*batch_size]
-            batch_B = path_B[i*batch_size:(i+1)*batch_size]
+        for i in range(self.n_batches - 1):
+            batch_A = path_A[i * batch_size:(i + 1) * batch_size]
+            batch_B = path_B[i * batch_size:(i + 1) * batch_size]
             imgs_A, imgs_B = [], []
             for img_A, img_B in zip(batch_A, batch_B):
                 img_A = self.imread(img_A)
@@ -66,18 +66,18 @@ class DataLoader():
                 imgs_A.append(img_A)
                 imgs_B.append(img_B)
 
-            imgs_A = np.array(imgs_A)/np.mean(np.array(imgs_A)) - 1.
-            imgs_B = np.array(imgs_B)/np.mean(np.array(imgs_B)) - 1.
+            imgs_A = np.array(imgs_A) / np.mean(np.array(imgs_A)) - 1.
+            imgs_B = np.array(imgs_B) / np.mean(np.array(imgs_B)) - 1.
 
             yield imgs_A, imgs_B
 
     def load_img(self, path):
         img = self.imread(path)
         img = scipy.misc.imresize(img, self.img_res)
-        img = img/np.mean(img) - 1.
+        img = img / np.mean(img) - 1.
         return img[np.newaxis, :, :, :]
 
     def imread(self, path):
         return np.load(path)
 
-#cache testing
+# cache testing
