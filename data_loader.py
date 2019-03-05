@@ -79,3 +79,5 @@ class DataLoader():
 
     def imread(self, path):
         return np.load(path)
+
+#cache testing
