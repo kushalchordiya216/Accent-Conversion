@@ -77,7 +77,3 @@ class DataLoader():
 
     def imread(self, path):
         return np.load(path)
-
-
-
-#ADD TO GIT PLEASE VS CODE PLS
