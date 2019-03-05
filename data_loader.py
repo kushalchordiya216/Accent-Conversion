@@ -3,6 +3,7 @@ from glob import glob
 import numpy as np
 import imageio
 
+
 class DataLoader():
     def __init__(self, dataset_name, img_res):
         self.dataset_name = dataset_name
@@ -11,9 +12,9 @@ class DataLoader():
     def load_data(self, domain, batch_size=1, is_testing=False):
         data_type = "train%s" % domain if not is_testing else "test%s" % domain
         path = glob('./datasets/%s/%s/*' % (self.dataset_name, data_type))
-        
-        print("list of paths:-",path[:5])
-        
+
+        print("list of paths:-", path[:5])
+
         batch_images = np.random.choice(path, size=batch_size)
 
         imgs = []
@@ -34,6 +35,7 @@ class DataLoader():
         return imgs
 
     def load_batch(self, batch_size=1, is_testing=False):
+        
         data_type = "train" if not is_testing else "val"
         path_A = glob('./datasets/%s/%sA/*' % (self.dataset_name, data_type))
         path_B = glob('./datasets/%s/%sB/*' % (self.dataset_name, data_type))
@@ -58,8 +60,8 @@ class DataLoader():
                 # img_B = scipy.misc.imresize(img_B, self.img_res)
 
                 if not is_testing and np.random.random() > 0.5:
-                        img_A = np.fliplr(img_A)
-                        img_B = np.fliplr(img_B)
+                    img_A = np.fliplr(img_A)
+                    img_B = np.fliplr(img_B)
 
                 imgs_A.append(img_A)
                 imgs_B.append(img_B)
