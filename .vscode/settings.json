@@ -4,5 +4,6 @@
     "python.linting.enabled": true,
      "python.linting.pep8Args": [
          "--ignore=E501" 
-     ]
+    ],
+    "python.pythonPath": "/home/kushal/anaconda3/bin/python"
 }
